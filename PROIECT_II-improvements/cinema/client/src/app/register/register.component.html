@@ -1,0 +1,67 @@
+<form [formGroup]="registerForm"
+      (ngSubmit)="registerForm.valid && register()"
+      autocomplete="off"
+      class="container">
+    <h2 class="text-center text-primary">Sign Up</h2>
+    <hr>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['firstName'])"
+                        [label]="'First Name'"></app-text-input>
+        <div *ngIf="registerForm.controls['firstName'].touched && registerForm.controls['firstName'].invalid" class="text-danger">
+            <small *ngIf="registerForm.controls['firstName'].errors?.['pattern']">First Name should contain only letters.</small>
+        </div>
+    </div>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['lastName'])"
+                        [label]="'Last Name'"></app-text-input>
+        <div *ngIf="registerForm.controls['lastName'].touched && registerForm.controls['lastName'].invalid" class="text-danger">
+            <small *ngIf="registerForm.controls['lastName'].errors?.['pattern']">Last Name should contain only letters.</small>
+        </div>
+    </div>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['email'])"
+                        [label]="'Email'"></app-text-input>
+        <div *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].invalid" class="text-danger">
+            <small *ngIf="registerForm.controls['email'].errors?.['email']">Invalid email format.</small>
+            <small *ngIf="registerForm.controls['email'].errors?.['pattern']">Email should not start with a number and must contain "@" and ".".</small>
+        </div>
+    </div>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['phoneNumber'])"
+                        [label]="'Phone Number'"></app-text-input>
+        <div *ngIf="registerForm.controls['phoneNumber'].touched && registerForm.controls['phoneNumber'].invalid" class="text-danger">
+            <small *ngIf="registerForm.controls['phoneNumber'].errors?.['pattern']">Phone Number should be exactly 10 digits.</small>
+        </div>
+    </div>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['password'])"
+                        [label]="'Password'"
+                        [type]="'password'"></app-text-input>
+        <div *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].invalid" class="text-danger">
+            <small *ngIf="registerForm.controls['password'].errors?.['minlength']">Password must be at least 8 characters long.</small>
+            <small *ngIf="registerForm.controls['password'].errors?.['maxlength']">Password must be at most 16 characters long.</small>
+        </div>
+    </div>
+
+    <div>
+        <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])"
+                        [label]="'Confirm Password'"
+                        [type]="'password'"></app-text-input>
+        <div *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].invalid" class="text-danger">
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button [disabled]="!registerForm.valid"
+                class="btn btn-primary me-2">Register</button>
+        <button class="btn btn-default"
+                (click)="cancel()"
+                type="button">Cancel</button>
+    </div>
+</form>
